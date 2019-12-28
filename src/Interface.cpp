@@ -2,13 +2,18 @@
 #include <iostream>
 
 #include <sstream>
-#include "dbg.h"
+// #include "dbg.h"
 
 Interface::Interface()
 {
 	std::cout << "hello cruel world\n";
-
+try{
 	win.create(sf::VideoMode(SCREEN_W, SCREEN_H), "Conway\'s Life");
+}catch(std::exception& e)
+{
+	std::cerr << e.what() << std::endl;
+}
+
 	if (not win.isOpen())
 		throw "Cannot open RenderWindow";
 }

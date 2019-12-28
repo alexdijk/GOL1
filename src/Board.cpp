@@ -12,7 +12,7 @@ Board::Board()
 		_sprite.setTexture(_texture);
 		_sprite.setOrigin(sf::Vector2f(0.f, 0.f));
 	}
-	catch (std::exception e)
+	catch (std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
 	}

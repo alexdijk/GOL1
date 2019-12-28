@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 cmake_policy(SET CMP0048 NEW)
 
-project(GOL VERSION 0.1.0 LANGUAGES CXX)
+project(GOL VERSION 0.1.1 LANGUAGES CXX)
 configure_file(GOLConfig.h.in GOLConfig.h)
 
 add_executable(GOL 
@@ -12,7 +12,8 @@ add_executable(GOL
 	src/StatusText.cpp
 	)
 
-target_compile_options(GOL PRIVATE -Wall -ggdb)
+#target_compile_options(GOL PRIVATE -Wall -O3)
+target_compile_options(GOL PRIVATE -Wall -pg -ggdb)
 target_compile_features(GOL PRIVATE cxx_std_14)
 
 target_include_directories(GOL

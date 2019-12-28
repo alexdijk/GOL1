@@ -14,7 +14,7 @@ All other live cells die in the next generation. Similarly, all other dead cells
 #include "StateField.h"
 #include <utility>
 
-#include "dbg.h"
+// #include "dbg.h"
 
 StateField::StateField()
 {
