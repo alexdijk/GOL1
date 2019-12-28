@@ -1,9 +1,15 @@
 #include <iostream>
 #include "Constants.h"
 #include "Interface.h"
+#include "GOLConfig.h"
 
-int main(size_t argc, char** argv)
+int main(int argc, char** argv)
 {
+	std::cout << "GOL Version: " 
+		<< GOL_VERSION_MAJOR << "." 
+		<< GOL_VERSION_MINOR << "." 
+		<< GOL_VERSION_PATCH << std::endl;
+
 	try
 	{
 		Interface iface;

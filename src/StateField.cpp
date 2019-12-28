@@ -33,7 +33,8 @@ StateField::StateField()
 
 StateField::~StateField()
 {
-	delete[] _curr, _next;
+	delete[] _curr;
+       	delete[] _next;
 }
 
 std::uint8_t* StateField::getField()
@@ -44,6 +45,8 @@ std::uint8_t* StateField::getField()
 void StateField::setPoint(const sf::Vector2i& pos)
 {
 	int i = (pos.y * SCREEN_W) + pos.x;
+	if(i<0 or i>TOTSIZE)  // pos reported can be out of bounds
+		return;
 	_curr[i] = 1;
 }
 
@@ -60,7 +63,7 @@ void StateField::update()
 
 int StateField::determineState(int _x)
 {
-	int p{}, q{}, a{}, b{}, r{};
+	int a{}, b{}, r{};
 
 	// top corner case
 	if (_x >= SCREEN_W) 

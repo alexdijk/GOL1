@@ -12,7 +12,7 @@ add_executable(GOL
 	src/StatusText.cpp
 	)
 
-target_compile_options(GOL PRIVATE -Wall)
+target_compile_options(GOL PRIVATE -Wall -ggdb)
 target_compile_features(GOL PRIVATE cxx_std_14)
 
 target_include_directories(GOL
