@@ -2,20 +2,27 @@
 #include <iostream>
 
 #include <sstream>
+#include "imgui.h"
+#include "imgui-SFML.h"
+
 // #include "dbg.h"
 
 Interface::Interface()
 {
 	std::cout << "hello cruel world\n";
-try{
-	win.create(sf::VideoMode(SCREEN_W, SCREEN_H), "Conway\'s Life");
-}catch(std::exception& e)
-{
-	std::cerr << e.what() << std::endl;
-}
 
-	if (not win.isOpen())
-		throw "Cannot open RenderWindow";
+	try{
+		win.create(sf::VideoMode(SCREEN_W, SCREEN_H), "Conway\'s Life");
+	
+		if (not win.isOpen())
+			throw "Cannot open RenderWindow";
+
+		ImGui::SFML::Init(win);
+	} 
+	catch(std::exception& e)
+	{	
+		std::cerr << e.what() << std::endl;
+	}
 }
 
 Interface::~Interface()
@@ -24,12 +31,16 @@ Interface::~Interface()
 
 void Interface::run()
 {
+	sf::Clock deltaTime;
+
 	while (win.isOpen())
 	{
 		sf::Event ev;
 
 		while (win.pollEvent(ev))
 		{
+			ImGui::SFML::ProcessEvent(ev);
+
 			switch (ev.type)
 			{
 			case sf::Event::Closed:
@@ -79,8 +90,18 @@ void Interface::run()
 			
 		_board.update(_paused);
 	
+		ImGui::SFML::Update(win, deltaTime.restart());
+
+		ImGui::Begin("Main tools");
+		ImGui::Button("button");
+		ImGui::End();
+
 		win.clear(sf::Color::White);
 		_board.draw(win);
+		ImGui::SFML::Render(win);
 		win.display();
 	}
+
+	ImGui::SFML::Shutdown();
 }
+

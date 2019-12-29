@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.12)
 cmake_policy(SET CMP0048 NEW)
 
-project(GOL VERSION 0.1.1 LANGUAGES CXX)
+project(GOL VERSION 0.2.1 LANGUAGES CXX)
 configure_file(GOLConfig.h.in GOLConfig.h)
 
 add_executable(GOL 
@@ -21,6 +21,8 @@ target_include_directories(GOL
 	/usr/include
 	${CMAKE_CURRENT_SOURCE_DIR}/include
 	${CMAKE_CURRENT_SOURCE_DIR}/../sfml/install/include
+	${CMAKE_CURRENT_SOURCE_DIR}/../imgui
+	${CMAKE_CURRENT_SOURCE_DIR}/../imgui-sfml/build/install/include
 	PUBLIC
 	${PROJECT_BINARY_DIR}
 	)
@@ -38,4 +40,9 @@ set(SFML_DIR "/home/alex/Documents/sfml/install/lib/cmake/SFML")
 
 find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
 target_link_libraries(GOL sfml-system sfml-window sfml-graphics)
+
+set(ImGui-SFML_DIR "/home/alex/Documents/imgui-sfml/build/install/lib/cmake/ImGui-SFML")
+find_package(ImGui-SFML COMPONENTS ImGui-SFML REQUIRED)
+#target_link_libraries(GOL PRIVATE ImGui-SFML::ImGui-SFML)
+target_link_libraries(GOL ImGui-SFML::ImGui-SFML)
 
